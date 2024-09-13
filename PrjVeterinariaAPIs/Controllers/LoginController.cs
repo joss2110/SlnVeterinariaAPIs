@@ -20,21 +20,23 @@ namespace PrjVeterinariaAPIs.Controllers
             daotipodoc = daoTipodoc;
         }
 
+        //http://localhost:5050/api/Login/Login/12345678/password123/1
 
         [HttpGet("Login/{nroDocumento}/{password}/{tipoDocumento}")]
-        public async Task<ActionResult<string>> LoginGet(string nroDocumento, string password, int tipoDocumento)
+        public async Task<ActionResult<Users>> LoginGet(string nroDocumento, string password, int tipoDocumento)
         {
-            bool isAuthenticated = await Task.Run(() => daousers.AuthenticateUser(nroDocumento, password, tipoDocumento));
+            Users usuario = await Task.Run(() => daousers.AuthenticateUser(nroDocumento, password, tipoDocumento));
 
-            if (isAuthenticated)
+            if (usuario != null)
             {
-                return Ok(true);
+                return Ok(usuario);
             }
             else
             {
                 return Unauthorized(false);
             }
         }
+
 
         [HttpGet("GetTipoDoc")]
         public async Task<ActionResult<List<TipoDoc>>> GetTipoDoc()
