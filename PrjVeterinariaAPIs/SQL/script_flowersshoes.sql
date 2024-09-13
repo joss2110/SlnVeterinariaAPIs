@@ -63,9 +63,10 @@ select * from tb_tipodoc
 
 INSERT INTO tb_users (nombres, idtipodoc, nroDocumento, password)
 VALUES
-('Juan Pérez', 1, '12345678', 'password123'),  -- DNI
-('Ana Gómez', 2, 'A1234567890', 'password456'), -- CEX
-('Luis Fernández', 3, '123456789012', 'password789'); -- PAS
+('Juan Pérez', 1, '12345678', 'Password123'),  -- DNI
+('Ana Gómez', 2, 'A123456789', 'Password456'), -- CEX
+('Luis Fernández', 3, '123456789012', 'Password789'); -- PAS
+
 
 select * from tb_users
 
