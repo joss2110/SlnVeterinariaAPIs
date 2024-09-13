@@ -3,15 +3,8 @@ using PrjVeterinariaAPIs.DAO;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<ColoresDAO>();
-builder.Services.AddScoped<TrabajadoresDAO>();
-builder.Services.AddScoped<RolesDAO>();
-builder.Services.AddScoped<StocksDAO>();
-builder.Services.AddScoped<ProductosDAO>();
-builder.Services.AddScoped<IngresosDAO>();
-builder.Services.AddScoped<DetalleIngresosDAO>();
-builder.Services.AddScoped<ClientesDAO>();
-builder.Services.AddScoped<CatalogoDAO>();
+builder.Services.AddScoped<UsersDAO>();
+builder.Services.AddScoped<TipoDocDAO>();
 
 // Add services to the container.
 
