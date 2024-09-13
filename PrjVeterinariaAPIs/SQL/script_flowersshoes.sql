@@ -30,5 +30,44 @@ password VARCHAR(100) NOT NULL
 );
 GO
 
+CREATE OR ALTER PROCEDURE sp_LoginUser
+    @nroDocumento VARCHAR(15),
+    @password VARCHAR(100),
+    @idtipodoc INT
+AS
+BEGIN
+    SELECT *
+    FROM tb_users
+    WHERE nroDocumento = @nroDocumento
+      AND password = @password
+      AND idtipodoc = @idtipodoc;
+END;
+GO
+
+CREATE PROCEDURE sp_ListarTipoDoc
+AS
+BEGIN
+    SELECT *
+    FROM tb_tipodoc;
+END;
+GO
+
+INSERT INTO tb_tipodoc (description, ndigits, tdigits)
+VALUES
+('DNI', 8, 'Numerico'),
+('CEX', 10, 'Alfanumerico'),
+('PAS', 12, 'Numerico');
+
+select * from tb_tipodoc
+
+
+INSERT INTO tb_users (nombres, idtipodoc, nroDocumento, password)
+VALUES
+('Juan Pérez', 1, '12345678', 'password123'),  -- DNI
+('Ana Gómez', 2, 'A1234567890', 'password456'), -- CEX
+('Luis Fernández', 3, '123456789012', 'password789'); -- PAS
+
+select * from tb_users
+
 
 
