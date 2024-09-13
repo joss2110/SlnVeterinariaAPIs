@@ -16,20 +16,31 @@ namespace PrjVeterinariaAPIs.DAO
         {
             bool isAuthenticated = false;
 
-            using (SqlDataReader dr = SqlHelper.ExecuteReader(cad_sql, "sp_LoginUser",
-                new SqlParameter("@nroDocumento", nroDocumento),
-                new SqlParameter("@password", password),
-                new SqlParameter("@idtipodoc", idtipodoc)))
+            using (SqlConnection conn = new SqlConnection(cad_sql))
             {
-                if (dr.Read()) 
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand("sp_LoginUser", conn))
                 {
-                    isAuthenticated = true;
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add(new SqlParameter("@nroDocumento", nroDocumento));
+                    cmd.Parameters.Add(new SqlParameter("@password", password));
+                    cmd.Parameters.Add(new SqlParameter("@idtipodoc", idtipodoc));
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            isAuthenticated = true;
+                        }
+                    }
                 }
             }
 
             return isAuthenticated;
         }
-
-       
     }
+
+
 }
